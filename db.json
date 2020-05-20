@@ -1,0 +1,35 @@
+{
+  "foods": [
+    {
+      "id": 1,
+      "name": "burger",
+      "price": 150,
+      "image": "https://ichef.bbci.co.uk/news/1024/cpsprodpb/11A09/production/_110410227_82e33a29-3a6c-45dd-889c-c295a13b7298.png"
+    },
+    {
+      "id": 2,
+      "name": "pomfrit",
+      "price": 100,
+      "image": "https://cms.splendidtable.org/sites/default/files/styles/w2000/public/french-fries.jpg?itok=FS-YwUYH"
+    },
+    {
+      "id": 3,
+      "name": "biftek",
+      "price": 300,
+      "image": "https://agropapuk.rs/wp-content/uploads/biftek-agropapuk-%C5%A1id-2.jpg"
+    },
+    {
+      "id": 4,
+      "name": "bolonjeze",
+      "price": 250,
+      "image": "https://hips.hearstapps.com/hmg-prod/images/delish-bolognese-horizontal-1-1540572556.jpg"
+    },
+    {
+      "id": 5,
+      "name": "lazanja",
+      "price": 600,
+      "image": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/delish-lasagna-bolognese-vertical-1543346980.png?crop=1.00xw:0.726xh;0,0.151xh&resize=480:*"
+    }
+  ],
+  "orders": []
+}

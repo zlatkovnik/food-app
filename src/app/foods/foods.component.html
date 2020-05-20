@@ -1,0 +1,22 @@
+<div class="app-container">
+  <div class="food-container">
+    <app-food
+      *ngFor="let food of foods"
+      [food]="food"
+      (click)="addToCart(food)"
+    ></app-food>
+  </div>
+  <div *ngIf="cart.length !== 0" class="cart-container">
+    <app-order
+      *ngFor="let order of cart"
+      [order]="order"
+      [handleRemove]="handleRemoveItemFromCart"
+    ></app-order>
+    <button class="btn" (click)="handleOrder()">
+      Naruči
+    </button>
+    <div class="label">
+      Ukupna cena <strong>{{ totalCost() }}</strong> RSD
+    </div>
+  </div>
+</div>

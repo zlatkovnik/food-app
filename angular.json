@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "food-app"
+    }
+  },
+  "defaultProject": "food-app",
+  "cli": {
+    "analytics": "d577e201-eac8-41a0-ac16-5a261ab3455b"
+  }
 }
