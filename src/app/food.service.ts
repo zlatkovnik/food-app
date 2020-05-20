@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
 
 import IOrder from './models/IOrder';
 import IFood from './models/IFood';
@@ -35,5 +36,11 @@ export class FoodService {
 
   removeOrder(id: number) {
     return this.http.delete<IOrder>(`${this.orderUrl}/${id}`, this.httpOptions);
+  }
+
+  removeAllOrders(orders: IOrder[]) {
+    return from(orders.map((order) => order.id)).pipe(
+      mergeMap((id) => this.removeOrder(id))
+    );
   }
 }

@@ -55,9 +55,9 @@ export class FoodsComponent implements OnInit {
   }
 
   handleOrder() {
-    alert('Uspešno naručena hrana u vrednosti od ' + this.totalCost());
-    this.cart.forEach((order) =>
-      this.foodService.removeOrder(order.id).subscribe((_) => (this.cart = []))
-    );
+    alert('Uspešno naručena hrana u vrednosti od ' + this.totalCost() + ' RSD');
+    this.foodService.removeAllOrders(this.cart).subscribe((_) => {
+      this.cart = [];
+    });
   }
 }
