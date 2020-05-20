@@ -11,7 +11,7 @@ import IFood from './models/IFood';
 })
 export class FoodService {
   private foodUrl =
-    'http://my-json-server.typicode.com/zlatkovnik/food-db/foods';
+    'https://my-json-server.typicode.com/zlatkovnik/food-db/foods';
   private orderUrl =
     'http://my-json-server.typicode.com/zlatkovnik/food-db/orders';
 
