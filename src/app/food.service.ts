@@ -10,8 +10,10 @@ import IFood from './models/IFood';
   providedIn: 'root',
 })
 export class FoodService {
-  private foodUrl = 'http://localhost:3000/foods';
-  private orderUrl = 'http://localhost:3000/orders';
+  private foodUrl =
+    'http://my-json-server.typicode.com/zlatkovnik/food-db/foods';
+  private orderUrl =
+    'http://my-json-server.typicode.com/zlatkovnik/food-db/orders';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -28,6 +30,10 @@ export class FoodService {
       JSON.stringify(order),
       this.httpOptions
     );
+  }
+
+  addOrders(orders: IOrder[]) {
+    return from(orders).pipe(mergeMap((order) => this.addOrder(order)));
   }
 
   getOrders() {

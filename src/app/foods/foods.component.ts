@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import IFood from '../models/IFood';
 import { FoodService } from '../food.service';
 import IOrder from '../models/IOrder';
+import ICartItem from '../models/ICartItem';
 
 @Component({
   selector: 'app-foods',
@@ -10,10 +11,10 @@ import IOrder from '../models/IOrder';
   styleUrls: ['./foods.component.css'],
 })
 export class FoodsComponent implements OnInit {
-  static orderId = 1;
+  static cartItemId = 1;
 
   foods: IFood[] = [];
-  cart: IOrder[] = [];
+  cart: ICartItem[] = [];
 
   constructor(private foodService: FoodService) {}
 
@@ -26,38 +27,33 @@ export class FoodsComponent implements OnInit {
   }
 
   addToCart(food: IFood): void {
-    const order: IOrder = {
+    const order: ICartItem = {
       id: this.generateOrderId(),
       food: food,
-      date: new Date(),
     };
-    this.foodService.addOrder(order).subscribe((_) => this.cart.push(order));
+    this.cart.push(order);
   }
 
   generateOrderId(): number {
-    return FoodsComponent.orderId++;
+    return FoodsComponent.cartItemId++;
   }
 
   totalCost(): string {
     if (this.cart.length === 0) return '';
     const cost = this.cart
-      .map((order) => order.food.price)
+      .map((cartItem) => cartItem.food.price)
       .reduce((acc, price) => acc + price);
     return cost === 0 ? '' : cost.toString();
   }
 
   handleRemoveItemFromCart(id: number) {
-    this.foodService
-      .removeOrder(id)
-      .subscribe(
-        (_) => (this.cart = this.cart.filter((order) => order.id != id))
-      );
+    this.cart = this.cart.filter((cartItem) => cartItem.id != id);
   }
 
   handleOrder() {
     alert('Uspešno naručena hrana u vrednosti od ' + this.totalCost() + ' RSD');
-    this.foodService.removeAllOrders(this.cart).subscribe((_) => {
-      this.cart = [];
+    this.foodService.addOrders(this.cart.map(cartItem => {id:cartItem.id, name:cartItem.food, })).subscribe((_) => {
+      
     });
   }
 }
