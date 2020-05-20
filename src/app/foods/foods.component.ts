@@ -52,8 +52,14 @@ export class FoodsComponent implements OnInit {
 
   handleOrder() {
     alert('Uspešno naručena hrana u vrednosti od ' + this.totalCost() + ' RSD');
-    this.foodService.addOrders(this.cart.map(cartItem => {id:cartItem.id, name:cartItem.food, })).subscribe((_) => {
-      
+    const orders: IOrder[] = this.cart.map<IOrder>((cartItem) => ({
+      id: cartItem.id,
+      food: cartItem.food,
+      date: new Date(),
+    }));
+    this.foodService.addOrders(orders).subscribe((food) => {
+      this.cart = [];
+      console.log('Narucena hrana', food);
     });
   }
 }
