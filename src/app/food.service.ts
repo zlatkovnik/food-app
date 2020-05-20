@@ -13,7 +13,7 @@ export class FoodService {
   private foodUrl =
     'https://my-json-server.typicode.com/zlatkovnik/food-db/foods';
   private orderUrl =
-    'http://my-json-server.typicode.com/zlatkovnik/food-db/orders';
+    'https://my-json-server.typicode.com/zlatkovnik/food-db/orders';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
