@@ -6,9 +6,10 @@
       (click)="addToCart(food)"
     ></app-food>
   </div>
-  <div *ngIf="cartItems && cartItems.length !== 0">
-    {{ cartItems[0].id }}
-    <!-- <div *ngFor="let cartItem of cart">Kurac</div> -->
+  <div *ngIf="cart$ | async as cart">
+    <div *ngFor="let cartItem of cart.cartItems">
+      {{ cartItem.food.name }}
+    </div>
   </div>
   <!-- <div *ngIf="cart.length !== 0" class="cart-container">
     <app-order

@@ -19,7 +19,6 @@ export class FoodsComponent implements OnInit {
   foods: Food[] = [];
 
   cart$: Observable<CartItem[]>;
-  cartItems: CartItem[] = [];
 
   constructor(
     private foodService: FoodService,
@@ -29,9 +28,6 @@ export class FoodsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cart$.subscribe((items) => (this.cartItems = items));
-    console.log(this.cartItems);
-
     this.foodService.getFoods().subscribe((foods) => (this.foods = foods));
 
     this.handleRemoveItemFromCart = this.handleRemoveItemFromCart.bind(this);
