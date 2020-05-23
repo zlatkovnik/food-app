@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import IOrder from '../models/IOrder';
+import IOrder from '../../models/IOrder';
 
 @Component({
   selector: 'app-order',

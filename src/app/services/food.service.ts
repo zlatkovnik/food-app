@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of, from } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import IOrder from './models/IOrder';
-import IFood from './models/IFood';
+import IOrder from '../models/IOrder';
+import IFood from '../models/IFood';
 
 @Injectable({
   providedIn: 'root',

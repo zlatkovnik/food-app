@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import IFood from '../models/IFood';
-import { FoodService } from '../food.service';
-import IOrder from '../models/IOrder';
-import ICartItem from '../models/ICartItem';
+import IFood from '../../models/IFood';
+import { FoodService } from '../../services/food.service';
+import IOrder from '../../models/IOrder';
+import ICartItem from '../../models/ICartItem';
 
 @Component({
   selector: 'app-foods',
