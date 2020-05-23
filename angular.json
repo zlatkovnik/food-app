@@ -123,6 +123,7 @@
   },
   "defaultProject": "food-app",
   "cli": {
-    "analytics": "d577e201-eac8-41a0-ac16-5a261ab3455b"
+    "defaultCollection": "@ngrx/schematics",
+    "analytics": "56ac84f7-ff51-48cf-934c-a852f50c19f4"
   }
 }
