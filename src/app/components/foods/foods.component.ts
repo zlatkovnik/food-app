@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import IFood from '../../models/IFood';
+import Food from '../../models/Food';
 import { FoodService } from '../../services/food.service';
-import IOrder from '../../models/IOrder';
-import ICartItem from '../../models/ICartItem';
+import Order from '../../models/Order';
+import CartItem from '../../models/CartItem';
 
 @Component({
   selector: 'app-foods',
@@ -13,8 +13,8 @@ import ICartItem from '../../models/ICartItem';
 export class FoodsComponent implements OnInit {
   static cartItemId = 1;
 
-  foods: IFood[] = [];
-  cart: ICartItem[] = [];
+  foods: Food[] = [];
+  cart: CartItem[] = [];
 
   constructor(private foodService: FoodService) {}
 
@@ -26,8 +26,8 @@ export class FoodsComponent implements OnInit {
     this.handleOrder = this.handleOrder.bind(this);
   }
 
-  addToCart(food: IFood): void {
-    const order: ICartItem = {
+  addToCart(food: Food): void {
+    const order: CartItem = {
       id: this.generateOrderId(),
       food: food,
     };
@@ -52,7 +52,7 @@ export class FoodsComponent implements OnInit {
 
   handleOrder() {
     alert('Uspešno naručena hrana u vrednosti od ' + this.totalCost() + ' RSD');
-    const orders: IOrder[] = this.cart.map<IOrder>((cartItem) => ({
+    const orders: Order[] = this.cart.map<Order>((cartItem) => ({
       id: cartItem.id,
       food: cartItem.food,
       date: new Date(),

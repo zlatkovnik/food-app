@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import IFood from '../../models/IFood';
+import Food from '../../models/Food';
 
 @Component({
   selector: 'app-food',
@@ -8,7 +8,7 @@ import IFood from '../../models/IFood';
   styleUrls: ['./food.component.css'],
 })
 export class FoodComponent implements OnInit {
-  @Input() food: IFood;
+  @Input() food: Food;
 
   constructor() {}
 

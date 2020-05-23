@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import IOrder from '../../models/IOrder';
+import Order from '../../models/Order';
 
 @Component({
   selector: 'app-order',
@@ -8,7 +8,7 @@ import IOrder from '../../models/IOrder';
   styleUrls: ['./order.component.css'],
 })
 export class OrderComponent implements OnInit {
-  @Input() order: IOrder;
+  @Input() order: Order;
   @Input() handleRemove: Function;
 
   constructor() {}

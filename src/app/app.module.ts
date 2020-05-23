@@ -7,10 +7,11 @@ import { FoodComponent } from './components/food/food.component';
 import { FoodsComponent } from './components/foods/foods.component';
 import { OrderComponent } from './components/order/order.component';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [AppComponent, FoodComponent, FoodsComponent, OrderComponent],
-  imports: [BrowserModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, FormsModule, HttpClientModule, StoreModule.forRoot({}, {})],
   providers: [],
   bootstrap: [AppComponent],
 })

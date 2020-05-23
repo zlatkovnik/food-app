@@ -1,4 +1,4 @@
-export default interface IFood {
+export default interface Food {
   id: number;
   name: string;
   price: number;
