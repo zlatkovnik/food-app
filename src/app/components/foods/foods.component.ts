@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import Food from '../../models/Food';
 import { FoodService } from '../../services/food.service';
-import Order from '../../models/Order';
 import CartItem from '../../models/CartItem';
+import { Observable, Subscription } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { addToCart, removeFromCart } from 'src/app/store/actions/cart.actions';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-foods',
@@ -14,13 +17,22 @@ export class FoodsComponent implements OnInit {
   static cartItemId = 1;
 
   foods: Food[] = [];
-  cart: CartItem[] = [];
 
-  constructor(private foodService: FoodService) {}
+  cart$: Observable<CartItem[]>;
+  cartItems: CartItem[] = [];
+
+  constructor(
+    private foodService: FoodService,
+    private store: Store<CartItem[]>
+  ) {
+    this.cart$ = store.select((state) => state);
+  }
 
   ngOnInit(): void {
+    this.cart$.subscribe((items) => (this.cartItems = items));
+    console.log(this.cartItems);
+
     this.foodService.getFoods().subscribe((foods) => (this.foods = foods));
-    this.foodService.getOrders().subscribe((orders) => (this.cart = orders));
 
     this.handleRemoveItemFromCart = this.handleRemoveItemFromCart.bind(this);
     this.handleOrder = this.handleOrder.bind(this);
@@ -31,7 +43,7 @@ export class FoodsComponent implements OnInit {
       id: this.generateOrderId(),
       food: food,
     };
-    this.cart.push(order);
+    this.store.dispatch(addToCart(order));
   }
 
   generateOrderId(): number {
@@ -39,27 +51,29 @@ export class FoodsComponent implements OnInit {
   }
 
   totalCost(): string {
-    if (this.cart.length === 0) return '';
-    const cost = this.cart
-      .map((cartItem) => cartItem.food.price)
-      .reduce((acc, price) => acc + price);
-    return cost === 0 ? '' : cost.toString();
+    //TODO
+    return '';
+    // if (this.cart.length === 0) return '';
+    // const cost = this.cart
+    //   .map((cartItem) => cartItem.food.price)
+    //   .reduce((acc, price) => acc + price);
+    // return cost === 0 ? '' : cost.toString();
   }
 
-  handleRemoveItemFromCart(id: number) {
-    this.cart = this.cart.filter((cartItem) => cartItem.id != id);
+  handleRemoveItemFromCart(cartItem: CartItem) {
+    this.store.dispatch(removeFromCart(cartItem));
   }
 
   handleOrder() {
-    alert('Uspešno naručena hrana u vrednosti od ' + this.totalCost() + ' RSD');
-    const orders: Order[] = this.cart.map<Order>((cartItem) => ({
-      id: cartItem.id,
-      food: cartItem.food,
-      date: new Date(),
-    }));
-    this.foodService.addOrders(orders).subscribe((food) => {
-      this.cart = [];
-      console.log('Narucena hrana', food);
-    });
+    // alert('Uspešno naručena hrana u vrednosti od ' + this.totalCost() + ' RSD');
+    // const orders: Order[] = this.cart.map<Order>((cartItem) => ({
+    //   id: cartItem.id,
+    //   food: cartItem.food,
+    //   date: new Date(),
+    // }));
+    // this.foodService.addOrders(orders).subscribe((food) => {
+    //   this.cart = [];
+    //   console.log('Narucena hrana', food);
+    // });
   }
 }

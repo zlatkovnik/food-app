@@ -1,19 +1,24 @@
 import { Action, createReducer, on } from '@ngrx/store';
+import {
+  addToCart,
+  removeFromCart,
+  getCartItems,
+} from '../actions/cart.actions';
 import CartItem from 'src/app/models/CartItem';
-import { addToCart, removeFromCart } from '../actions/cart.actions';
 
-export const cartFeatureKey = 'cart';
+//export const cartFeatureKey = 'cart';
 
-export interface State {
+export interface CartState {
   cartItems: CartItem[];
 }
 
-export const initialState: State = {
+export const initialState: CartState = {
   cartItems: [],
 };
 
 export const _cartReducer = createReducer(
   initialState,
+  on(getCartItems, (state) => state),
   on(addToCart, (state, cartItem) => ({
     ...state,
     cartItems: [...state.cartItems, cartItem],
@@ -24,6 +29,6 @@ export const _cartReducer = createReducer(
   }))
 );
 
-export function cartReducer(state: State | undefined, action: Action) {
+export function cartReducer(state: CartState | undefined, action: Action) {
   return _cartReducer(state, action);
 }
