@@ -19,12 +19,15 @@ export class FoodsComponent implements OnInit {
   foods: Food[] = [];
 
   cart$: Observable<CartItem[]>;
+  cartItems: CartItem[];
 
   constructor(
     private foodService: FoodService,
     private store: Store<CartItem[]>
   ) {
-    this.cart$ = store.select((state) => state);
+    //@ts-ignore
+    this.cart$ = store.select((state) => state.cart);
+    this.cart$.subscribe((items) => (this.cartItems = items));
   }
 
   ngOnInit(): void {
@@ -35,11 +38,11 @@ export class FoodsComponent implements OnInit {
   }
 
   addToCart(food: Food): void {
-    const order: CartItem = {
+    const cartItem: CartItem = {
       id: this.generateOrderId(),
       food: food,
     };
-    this.store.dispatch(addToCart(order));
+    this.store.dispatch(addToCart({ cartItem }));
   }
 
   generateOrderId(): number {
@@ -57,7 +60,7 @@ export class FoodsComponent implements OnInit {
   }
 
   handleRemoveItemFromCart(cartItem: CartItem) {
-    this.store.dispatch(removeFromCart(cartItem));
+    this.store.dispatch(removeFromCart({ cartItem }));
   }
 
   handleOrder() {

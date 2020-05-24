@@ -12,7 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import { environment } from '../environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { cartReducer } from './store/reducers/cart.reducer';
+import * as cart from './store/reducers/cart.reducer';
 
 @NgModule({
   declarations: [AppComponent, FoodComponent, FoodsComponent, OrderComponent],
@@ -20,7 +20,7 @@ import { cartReducer } from './store/reducers/cart.reducer';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot({ cart: cartReducer }),
+    StoreModule.forRoot({ cart: cart.reducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
